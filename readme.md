@@ -2,6 +2,10 @@
 
 ###### A fork of [spring-projects](https://github.com/spring-projects/spring-petclinic) PetClinic
 
+Updated Build Environment Configuration Documentation [specific to SpliceMachine][1] new developers.
+
+[1]: https://splicemachine.atlassian.net/wiki/spaces/~nnygaard/pages/115507299/Configure+Build+Environment
+
 ## Understanding the Spring Petclinic application with a few diagrams
 <a href="https://speakerdeck.com/michaelisvy/spring-petclinic-sample-application">See the presentation here</a>
 
