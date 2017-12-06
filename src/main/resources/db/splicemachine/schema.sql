@@ -1,3 +1,18 @@
+
+/*
+  DBAAS-1135 - Baseline Spring Implementation (PetClinic)
+  This is a workaround because I was unable to get "IF NOT EXISTS" to work with the
+  SpliceMachine grammar. Drop the tables before making them.
+*/
+
+DROP TABLE visits IF EXISTS;
+DROP TABLE pets IF EXISTS;
+DROP TABLE owners IF EXISTS;
+DROP TABLE types IF EXISTS;
+DROP TABLE vet_specialties IF EXISTS;
+DROP TABLE specialties IF EXISTS;
+DROP TABLE vets IF EXISTS;
+
 CREATE TABLE vets (
   id         INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
   first_name VARCHAR(30),
