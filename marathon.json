@@ -1,0 +1,45 @@
+{
+  "id": "petclinic",
+  "cmd": null,
+  "cpus": 0.1,
+  "mem": 256,
+  "disk": 0,
+  "instances": 1,
+  "constraints": [
+    [
+      "hostname",
+      "UNIQUE"
+    ]
+  ],
+  "acceptedResourceRoles": [
+    "slave_public",
+    "*"
+  ],
+  "container": {
+    "type": "DOCKER",
+    "volumes": [
+      {
+        "containerPath": "/opt",
+        "hostPath": "/mnt/opt",
+        "mode": "RO"
+      }
+    ],
+    "docker": {
+      "image": "splicemachine/petclinic:latest",
+      "network": "BRIDGE",
+      "portMappings": [],
+      "privileged": false,
+      "parameters": [],
+      "forcePullImage": true
+    }
+  },
+  "env": {
+    "TERM": "xterm",
+    "DOCKER_CONFIG": "/etc/mesosphere/docker_credentials"
+  },
+  "portDefinitions": [],
+  "upgradeStrategy": {
+    "minimumHealthCapacity": 0,
+    "maximumOverCapacity": 0
+  }
+}
