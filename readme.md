@@ -15,8 +15,7 @@ Our driver speaks JDBC and this is an effort to demonstrate that an established 
 ### Build Environment
 Updated Build Environment Configuration Documentation [specific to SpliceMachine][1] new developers.
 
-### Database configuration
-
+### `localhost` database configuration
 In its default configuration, Petclinic uses an in-memory database (HSQLDB) which
 gets populated at startup with data. 
 
@@ -35,6 +34,21 @@ spring.jpa.database-platform=com.splicemachine.SpliceMachineDialect
 ```
 See our [tutorials][3] to connect to our ODBC driver to allow Splice Machine to connect any other database or business tools that needs access to your database
 
+### Build and Push to Cloud
+```
+mvn install -DskipTests
+docker build .
+[image output]
+docker tag [image output] splicemachine/petclinic
+docker push splicemachine/petclinic
+```
+**Note**: Test skipping is necessary at this point because not all database interactions are implemented.
+
+### Run Marathon Application
+- Go to desired Marathon environment
+- Select "Create Application"
+- Use contents of `marathon.json` to create application
+- **Note**: The `marathon.json` contains environment variables that are necessary to run the application's docker container locally, should you choose to test locally.
 
 ## Inherited Readme
 Please see the [documentation][2] for the original repo.
