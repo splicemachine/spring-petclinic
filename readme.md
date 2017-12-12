@@ -1,33 +1,21 @@
 # Splice Machine Spring PetClinic Sample Application 
 
-###### A fork of [spring-projects](https://github.com/spring-projects/spring-petclinic) PetClinic
+###### A fork of [spring-projects/spring-petclinic][4]
 
+
+## Splice Machine Configuration
+
+In this fork we have made modifications to utilize:
+```
+com.splicemachine.db.jdbc.ClientDriver
+com.splicemachine.hibernate.SpliceMachineDialect
+```
+Our driver speaks JDBC and this is an effort to demonstrate that an established application can drop in Splice Machine and hit the groud running.
+
+### Build Environment
 Updated Build Environment Configuration Documentation [specific to SpliceMachine][1] new developers.
 
-[1]: https://splicemachine.atlassian.net/wiki/spaces/~nnygaard/pages/115507299/Configure+Build+Environment
-
-## Understanding the Spring Petclinic application with a few diagrams
-<a href="https://speakerdeck.com/michaelisvy/spring-petclinic-sample-application">See the presentation here</a>
-
-## Splice configuration
-For instructions on how to set up and start your Splice Cluster, see our Spliceengine [readme](https://github.com/splicemachine/spliceengine)
-
-## Running petclinic locally
-```
-	git clone https://github.com/splicemachine/spring-petclinic.git
-	cd spring-petclinic
-	./mvnw spring-boot:run
-```
-
-You can then access petclinic here: http://localhost:8080/
-
-<img width="1042" alt="petclinic-screenshot" src="https://cloud.githubusercontent.com/assets/838318/19727082/2aee6d6c-9b8e-11e6-81fe-e889a5ddfded.png">
-
-## In case you find a bug/suggested improvement for Spring Petclinic
-Our issue tracker is available here: https://github.com/splicemachine/spring-petclinic/issues
-
-
-## Database configuration
+### Database configuration
 
 In its default configuration, Petclinic uses an in-memory database (HSQLDB) which
 gets populated at startup with data. 
@@ -39,34 +27,23 @@ database=splicemachine
 spring.datasource.schema=classpath*:db/${database}/schema.sql
 spring.datasource.data=classpath*:db/${database}/data.sql
 
-
 spring.datasource.url=jdbc:splice://localhost:1527/splicedb;user=splice;password=admin
 spring.datasource.username=splice
 spring.datasource.password=admin
 spring.datasource.driver-class-name=com.splicemachine.db.jdbc.ClientDriver
 spring.jpa.database-platform=com.splicemachine.SpliceMachineDialect
 ```
-See our [tutorials](https://www.splicemachine.com/tutorial/connecting-programmatically/) to connect to our ODBC driver to allow Splice Machine to connect any other database or business tools that needs access to your database
-
-## Working with Petclinic in Eclipse/STS
-
-### prerequisites
-The following items should be installed in your system:
-* Maven 3 (http://www.sonatype.com/books/mvnref-book/reference/installation.html)
-* git command line tool (https://help.github.com/articles/set-up-git)
-* Eclipse with the m2e plugin (m2e is installed by default when using the STS (http://www.springsource.org/sts) distribution of Eclipse)
-
-Note: when m2e is available, there is an m2 icon in Help -> About dialog.
-If m2e is not there, just follow the install process here: http://eclipse.org/m2e/download/
+See our [tutorials][3] to connect to our ODBC driver to allow Splice Machine to connect any other database or business tools that needs access to your database
 
 
-### Steps:
+## Inherited Readme
+Please see the [documentation][2] for the original repo.
 
-1) In the command line
-```
-git clone https://github.com/spring-projects/spring-petclinic.git
-```
-2) Inside Eclipse
-```
-File -> Import -> Maven -> Existing Maven project
-```
+## Miscellaneous
+- [Eclipse Configuration][5]
+
+[1]: https://splicemachine.atlassian.net/wiki/spaces/~nnygaard/pages/115507299/Configure+Build+Environment
+[2]:https://github.com/spring-projects/spring-petclinic
+[3]: https://www.splicemachine.com/tutorial/connecting-programmatically/
+[4]: https://github.com/spring-projects/spring-petclinic
+[5]: docs/eclipse-configuration.md
