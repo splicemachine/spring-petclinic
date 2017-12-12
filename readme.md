@@ -1,4 +1,4 @@
-# Splice Machine Spring PetClinic Sample Application [![Build Status](https://travis-ci.org/spring-projects/spring-petclinic.png?branch=master)](https://travis-ci.org/spring-projects/spring-petclinic/)
+# Splice Machine Spring PetClinic Sample Application 
 
 ###### A fork of [spring-projects](https://github.com/spring-projects/spring-petclinic) PetClinic
 
@@ -11,6 +11,7 @@ Updated Build Environment Configuration Documentation [specific to SpliceMachine
 
 ## Splice configuration
 For instructions on how to set up and start your Splice Cluster, see our Spliceengine [readme](https://github.com/splicemachine/spliceengine)
+
 ## Running petclinic locally
 ```
 	git clone https://github.com/splicemachine/spring-petclinic.git
