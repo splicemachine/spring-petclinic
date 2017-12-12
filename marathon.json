@@ -1,16 +1,10 @@
 {
-  "id": "petclinic",
+  "id": "/petclinic",
   "cmd": null,
-  "cpus": 0.1,
-  "mem": 256,
-  "disk": 0,
+  "cpus": 1,
+  "mem": 4096,
+  "disk": 2000,
   "instances": 1,
-  "constraints": [
-    [
-      "hostname",
-      "UNIQUE"
-    ]
-  ],
   "acceptedResourceRoles": [
     "slave_public",
     "*"
@@ -26,7 +20,7 @@
     ],
     "docker": {
       "image": "splicemachine/petclinic:latest",
-      "network": "BRIDGE",
+      "network": "HOST",
       "portMappings": [],
       "privileged": false,
       "parameters": [],
@@ -35,8 +29,21 @@
   },
   "env": {
     "TERM": "xterm",
-    "DOCKER_CONFIG": "/etc/mesosphere/docker_credentials"
+    "DOCKER_CONFIG": "/etc/mesosphere/docker_credentials",
+    "DATABASE_HOST": "jdbc:splice://erinsaccount-test6-0b42947c59-proxy.marathon.mesos:1527/splicedb;password=admin;user=splice"
   },
+  "healthChecks": [
+    {
+      "gracePeriodSeconds": 3000,
+      "intervalSeconds": 60,
+      "timeoutSeconds": 20,
+      "maxConsecutiveFailures": 100,
+      "port": 8080,
+      "path": "/",
+      "protocol": "HTTP",
+      "ignoreHttp1xx": false
+    }
+  ],
   "portDefinitions": [],
   "upgradeStrategy": {
     "minimumHealthCapacity": 0,
