@@ -1,0 +1,52 @@
+{
+  "id": "/petclinic",
+  "cmd": null,
+  "cpus": 1,
+  "mem": 4096,
+  "disk": 2000,
+  "instances": 1,
+  "acceptedResourceRoles": [
+    "slave_public",
+    "*"
+  ],
+  "container": {
+    "type": "DOCKER",
+    "volumes": [
+      {
+        "containerPath": "/opt",
+        "hostPath": "/mnt/opt",
+        "mode": "RO"
+      }
+    ],
+    "docker": {
+      "image": "splicemachine/petclinic:latest",
+      "network": "HOST",
+      "portMappings": [],
+      "privileged": false,
+      "parameters": [],
+      "forcePullImage": true
+    }
+  },
+  "env": {
+    "TERM": "xterm",
+    "DOCKER_CONFIG": "/etc/mesosphere/docker_credentials",
+    "DATABASE_HOST": "jdbc:splice://erinsaccount-test6-0b42947c59-proxy.marathon.mesos:1527/splicedb;password=admin;user=splice"
+  },
+  "healthChecks": [
+    {
+      "gracePeriodSeconds": 3000,
+      "intervalSeconds": 60,
+      "timeoutSeconds": 20,
+      "maxConsecutiveFailures": 100,
+      "port": 8080,
+      "path": "/",
+      "protocol": "HTTP",
+      "ignoreHttp1xx": false
+    }
+  ],
+  "portDefinitions": [],
+  "upgradeStrategy": {
+    "minimumHealthCapacity": 0,
+    "maximumOverCapacity": 0
+  }
+}

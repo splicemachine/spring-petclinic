@@ -1,67 +1,57 @@
-# Splice Machine Spring PetClinic Sample Application [![Build Status](https://travis-ci.org/spring-projects/spring-petclinic.png?branch=master)](https://travis-ci.org/spring-projects/spring-petclinic/)
+# Splice Machine Spring PetClinic Sample Application 
 
-###### A fork of [spring-projects](https://github.com/spring-projects/spring-petclinic) PetClinic
+###### A fork of [spring-projects/spring-petclinic][4]
 
-## Understanding the Spring Petclinic application with a few diagrams
-<a href="https://speakerdeck.com/michaelisvy/spring-petclinic-sample-application">See the presentation here</a>
+## Overview
+PetClinic is a Spring application designed to demonstrate the framework's ability to interact with a database. Our fork includes our hibernate dialect and JDBC driver in an effort to demonstrate drop-in communication with Splice Machine as the datastore.
 
-## Splice configuration
-For instructions on how to set up and start your Splice Cluster, see our Spliceengine [readme](https://github.com/splicemachine/spliceengine)
-## Running petclinic locally
+In this fork we have made modifications to utilize:
 ```
-	git clone https://github.com/splicemachine/spring-petclinic.git
-	cd spring-petclinic
-	./mvnw spring-boot:run
+com.splicemachine.db.jdbc.ClientDriver
+com.splicemachine.hibernate.SpliceMachineDialect
 ```
 
-You can then access petclinic here: http://localhost:8080/
-
-<img width="1042" alt="petclinic-screenshot" src="https://cloud.githubusercontent.com/assets/838318/19727082/2aee6d6c-9b8e-11e6-81fe-e889a5ddfded.png">
-
-## In case you find a bug/suggested improvement for Spring Petclinic
-Our issue tracker is available here: https://github.com/splicemachine/spring-petclinic/issues
-
-
-## Database configuration
-
-In its default configuration, Petclinic uses an in-memory database (HSQLDB) which
-gets populated at startup with data. 
-
-You could start a Splice Machine database running locally by editing application.properties:
-
+## Build and Run
+### Spring Local
+You can use the original Spring development server to test the application locally:
+```bash
+./mvnw spring-boot:run
 ```
-database=splicemachine
-spring.datasource.schema=classpath*:db/${database}/schema.sql
-spring.datasource.data=classpath*:db/${database}/data.sql
 
-
-spring.datasource.url=jdbc:splice://localhost:1527/splicedb;user=splice;password=admin
-spring.datasource.username=splice
-spring.datasource.password=admin
-spring.datasource.driver-class-name=com.splicemachine.db.jdbc.ClientDriver
-spring.jpa.database-platform=com.splicemachine.SpliceMachineDialect
+### Container Local
+To test the container locally you will want to pass the Splice Machine database connection string via the environment:
 ```
-See our [tutorials](https://www.splicemachine.com/tutorial/connecting-programmatically/) to connect to our ODBC driver to allow Splice Machine to connect any other database or business tools that needs access to your database
-
-## Working with Petclinic in Eclipse/STS
-
-### prerequisites
-The following items should be installed in your system:
-* Maven 3 (http://www.sonatype.com/books/mvnref-book/reference/installation.html)
-* git command line tool (https://help.github.com/articles/set-up-git)
-* Eclipse with the m2e plugin (m2e is installed by default when using the STS (http://www.springsource.org/sts) distribution of Eclipse)
-
-Note: when m2e is available, there is an m2 icon in Help -> About dialog.
-If m2e is not there, just follow the install process here: http://eclipse.org/m2e/download/
-
-
-### Steps:
-
-1) In the command line
+mvn install -DskipTests
+docker build .
+[image hash]
+docker run -p 8080:8080 --name petclinic -e"DATABASE_HOST=jdbc:splice://docker.for.mac.localhost:1527/splicedb;user=splice;password=admin" [image hash]
 ```
-git clone https://github.com/spring-projects/spring-petclinic.git
+>**Note**: The Docker Apple DNS convention `docker.for.mac.localhost` is used to facilitate communication with the host machine. Local containers will need to access the host machine's copy of Splice Machine.
+
+### Container Cloud Push
 ```
-2) Inside Eclipse
+mvn install -DskipTests
+docker build .
+[image hash]
+docker tag [image hash] splicemachine/petclinic
+docker push splicemachine/petclinic
 ```
-File -> Import -> Maven -> Existing Maven project
-```
+**Note**: Test skipping is necessary at this point because not all database interactions are implemented.
+
+### Run Marathon Application
+- Go to desired Marathon environment
+- Select "Create Application"
+- Use contents of `marathon.json` to create application
+- **Note**: You will want to modify `$DATABASE_HOST` in the marathon application environment to reflect the location of your database.
+
+## Inherited Readme
+Please see the [documentation][2] for the original repo.
+
+<!-- ## Miscellaneous
+- [Eclipse Configuration][5] -->
+
+[1]: https://splicemachine.atlassian.net/wiki/spaces/~nnygaard/pages/115507299/Configure+Build+Environment
+[2]:https://github.com/spring-projects/spring-petclinic
+[3]: https://www.splicemachine.com/tutorial/connecting-programmatically/
+[4]: https://github.com/spring-projects/spring-petclinic
+[5]: docs/eclipse-configuration.md
