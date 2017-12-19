@@ -6,8 +6,7 @@
   "disk": 2000,
   "instances": 1,
   "acceptedResourceRoles": [
-    "slave_public",
-    "*"
+    "slave_public"
   ],
   "container": {
     "type": "DOCKER",
@@ -30,7 +29,7 @@
   "env": {
     "TERM": "xterm",
     "DOCKER_CONFIG": "/etc/mesosphere/docker_credentials",
-    "DATABASE_HOST": "jdbc:splice://erinsaccount-test6-0b42947c59-proxy.marathon.mesos:1527/splicedb;password=admin;user=splice"
+    "DATABASE_HOST": "jdbc:splice://erinsaccount-test8-21ed9843d9-proxy.marathon.mesos:1527/splicedb;password=admin;user=splice"
   },
   "healthChecks": [
     {
