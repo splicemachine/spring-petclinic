@@ -1,0 +1,14 @@
+{
+  "name": "petclinic-jenkins-e2e",
+  "version": "0.0.1",
+  "description": "Node app for jenkins to test petclinic demo.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nikhil Nygaard <https://nygaard.site>",
+  "license": "MIT",
+  "dependencies": {
+    "nightwatch": "^0.9.20"
+  }
+}
