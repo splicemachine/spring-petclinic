@@ -29,7 +29,7 @@
   "env": {
     "TERM": "xterm",
     "DOCKER_CONFIG": "/etc/mesosphere/docker_credentials",
-    "DATABASE_HOST": "jdbc:splice://montessspliceaccount-streamtest-6160590510-proxy.marathon.mesos:1527/splicedb;user=splice;password=admin"
+    "DATABASE_HOST": "jdbc:splice://stl-colo-srv109:1527/splicedb;user=splice;password=admin"
   },
   "healthChecks": [
     {

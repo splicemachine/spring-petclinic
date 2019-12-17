@@ -74,3 +74,19 @@ CREATE TABLE visits (
 );
 ALTER TABLE visits ADD CONSTRAINT fk_visits_pets FOREIGN KEY (pet_id) REFERENCES pets (id);
 CREATE INDEX visits_pet_id ON visits (pet_id);
+
+CALL SQLJ.REMOVE_JAR('SPLICE.pet', 0);
+
+CALL SQLJ.INSTALL_JAR('s3a://splice-demo/pocfunctions.jar', 'SPLICE.pet', 0);
+
+CALL SYSCS_UTIL.SYSCS_SET_GLOBAL_DATABASE_PROPERTY('derby.database.classpath', 'SPLICE.pet');
+
+DROP FUNCTION splice.identity_val_local;
+
+CREATE FUNCTION SPLICE.identity_val_local ()
+    RETURNS integer
+    LANGUAGE JAVA
+    PARAMETER STYLE JAVA
+    READS SQL DATA
+    EXTERNAL NAME 'com.splicemachine.poc.Main.identity_val_local';
+
